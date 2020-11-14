@@ -21,6 +21,8 @@ $('#searchBtn').click(function () {
   }).then(function (response) {
     console.log(response)
     console.log(queryUrl)
+    //below i have grouped the current city and weather data below
+    {
     var cityToday = response.name
     $('.currentCity').text(cityToday)
     var tempToday = response.main.temp
@@ -31,6 +33,7 @@ $('#searchBtn').click(function () {
     $('#windSpeed').text(windSpeedToday)
     var uvIndexToday =
      $('.uvIndex').text(uvIndexToday)
+    }
   })
   var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey;
   $.ajax({
@@ -38,6 +41,7 @@ $('#searchBtn').click(function () {
     method: "GET"
   }).then(function(data) {
     console.log(queryUrl2)
+
     // below is the list of days and times from now
     {
     var daycast1= data.list[0].dt_txt;
@@ -64,7 +68,7 @@ $('#searchBtn').click(function () {
       var temperatureCast5= data.list[4].main.humidity;
       $('#temperature5').text(temperatureCast5);
     }
-    // below is the 15 houre forecast of humidity
+    // below is the 15 hour forecast of humidity
     {
       var humidityCast1= data.list[0].main.temp;
       $('#humidity1').text(humidityCast1);
@@ -77,15 +81,19 @@ $('#searchBtn').click(function () {
       var humidityCast5= data.list[4].main.temp;
       $('#humidity5').text(humidityCast5);
     }
-  //  var tempToday1 = data.list[0].main[0]
-  //  $('.temperature1').text(tempToday1)
-  //  var humidityToday1 = data.list[0].humidity
-  //  $('.humidity1').text(humidityToday)
-  //  var windSpeedToday1 = data.list[0].wind.speed
-  //  $('.windSpeed1').text(windSpeedToday1)
-  //  var uvIndexToday1 =
-  //    $('.uvIndex1').text(uvIndexToday1)
-  //  
+    //below is the 15 hour forecast wind speed
+    {
+      var windSpeedCast1= data.list[0].wind.speed;
+      $('#windSpeed1').text(windSpeedCast1);
+      var windSpeedCast2= data.list[1].wind.speed;
+      $('#windSpeed2').text(windSpeedCast2);
+      var windSpeedCast3= data.list[2].wind.speed;
+      $('#windSpeed3').text(windSpeedCast3);
+      var windSpeedCast4= data.list[3].wind.speed;
+      $('#windSpeed4').text(windSpeedCast4);
+      var windSpeedCast5= data.list[4].wind.speed;
+      $('#windSpeed5').text(windSpeedCast5);
+    }
       console.log(data)
   })
 }
