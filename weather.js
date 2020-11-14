@@ -53,17 +53,30 @@ $('#searchBtn').click(function () {
     }
     // below is the 15 hour forecast of temp
     {
-      var daycast1= data.list[0].dt_txt;
-      $('#day1').text(daycast1);
-      var daycast2= data.list[1].dt_txt;
-      $('#day2').text(daycast2);
-      var daycast3= data.list[2].dt_txt;
-      $('#day3').text(daycast3);
-      var daycast4= data.list[3].dt_txt;
-      $('#day4').text(daycast4);
-      var daycast5= data.list[4].dt_txt;
-      $('#day5').text(daycast5);
-      }
+      var temperatureCast1= data.list[0].main.humidity;
+      $('#temperature1').text(temperatureCast1);
+      var temperatureCast2= data.list[1].main.humidity;
+      $('#temperature2').text(temperatureCast2);
+      var temperatureCast3= data.list[2].main.humidity;
+      $('#temperature3').text(temperatureCast3);
+      var temperatureCast4= data.list[3].main.humidity;
+      $('#temperature4').text(temperatureCast4);
+      var temperatureCast5= data.list[4].main.humidity;
+      $('#temperature5').text(temperatureCast5);
+    }
+    // below is the 15 houre forecast of humidity
+    {
+      var humidityCast1= data.list[0].main.temp;
+      $('#humidity1').text(humidityCast1);
+      var humidityCast2= data.list[1].main.temp;
+      $('#humidity2').text(humidityCast2);
+      var humidityCast3= data.list[2].main.temp;
+      $('#humidity3').text(humidityCast3);
+      var humidityCast4= data.list[3].main.temp;
+      $('#humidity4').text(humidityCast4);
+      var humidityCast5= data.list[4].main.temp;
+      $('#humidity5').text(humidityCast5);
+    }
   //  var tempToday1 = data.list[0].main[0]
   //  $('.temperature1').text(tempToday1)
   //  var humidityToday1 = data.list[0].humidity
