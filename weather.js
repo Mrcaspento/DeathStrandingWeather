@@ -6,12 +6,22 @@ var searchBtn = $('#add-city');
 
 
 
-var cityArry = [];
+$("#cityTerm").keypress(function (event) {
+
+  if (event.keyCode === 13) {
+    event.preventDefault();
+    $("#searchBtn").click();
+  }
+});
+function makeList() {
+  let listItem = $("#citys-go-here").addClass("list-group-item").text(city);
+  $(".list").append(listItem);
+}
 
 // code below puts the user input into the main dashboard
 $('#searchBtn').click(function () {
   event.preventDefault()
-  var city = $('#cityTerm').val();
+   city = $('#cityTerm').val();
   $('#cityTerm').val("");
 
   const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
@@ -19,86 +29,99 @@ $('#searchBtn').click(function () {
     url: queryUrl,
     method: "GET"
   }).then(function (response) {
-    console.log(response)
+    console.log(response.weather[0].icon)
     console.log(queryUrl)
     //below i have grouped the current city and weather data below
     {
-    var cityToday = response.name
-    $('.currentCity').text(cityToday)
-    var tempToday = response.main.temp
-    $('#temperature').text(tempToday)
-    var humidityToday = response.main.humidity
-    $('#humidity').text(humidityToday)
-    var windSpeedToday = response.wind.speed
-    $('#windSpeed').text(windSpeedToday)
-    var uvIndexToday =
-     $('.uvIndex').text(uvIndexToday)
+      var cityToday = response.name
+      $('.currentCity').text(cityToday)
+      var tempToday = response.main.temp
+      $('#temperature').text(tempToday)
+      var humidityToday = response.main.humidity
+      $('#humidity').text(humidityToday)
+      var windSpeedToday = response.wind.speed
+      $('#windSpeed').text(windSpeedToday)
+      var uvIndexToday =
+        $('.uvIndex').text(uvIndexToday)
     }
+    makeList();
   })
   var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey;
   $.ajax({
     url: queryUrl2,
     method: "GET"
-  }).then(function(data) {
+  }).then(function (data) {
     console.log(queryUrl2)
 
     // below is the list of days and times from now
     {
-    var daycast1= data.list[0].dt_txt;
-    $('#day1').text(daycast1);
-    var daycast2= data.list[1].dt_txt;
-    $('#day2').text(daycast2);
-    var daycast3= data.list[2].dt_txt;
-    $('#day3').text(daycast3);
-    var daycast4= data.list[3].dt_txt;
-    $('#day4').text(daycast4);
-    var daycast5= data.list[4].dt_txt;
-    $('#day5').text(daycast5);
+      var daycast1 = data.list[0].dt_txt;
+      $('#day1').text(daycast1);
+      var daycast2 = data.list[1].dt_txt;
+      $('#day2').text(daycast2);
+      var daycast3 = data.list[2].dt_txt;
+      $('#day3').text(daycast3);
+      var daycast4 = data.list[3].dt_txt;
+      $('#day4').text(daycast4);
+      var daycast5 = data.list[4].dt_txt;
+      $('#day5').text(daycast5);
     }
     // below is the 15 hour forecast of temp
     {
-      var temperatureCast1= data.list[0].main.humidity;
+      var temperatureCast1 = data.list[0].main.humidity;
       $('#temperature1').text(temperatureCast1);
-      var temperatureCast2= data.list[1].main.humidity;
+      var temperatureCast2 = data.list[1].main.humidity;
       $('#temperature2').text(temperatureCast2);
-      var temperatureCast3= data.list[2].main.humidity;
+      var temperatureCast3 = data.list[2].main.humidity;
       $('#temperature3').text(temperatureCast3);
-      var temperatureCast4= data.list[3].main.humidity;
+      var temperatureCast4 = data.list[3].main.humidity;
       $('#temperature4').text(temperatureCast4);
-      var temperatureCast5= data.list[4].main.humidity;
+      var temperatureCast5 = data.list[4].main.humidity;
       $('#temperature5').text(temperatureCast5);
     }
     // below is the 15 hour forecast of humidity
     {
-      var humidityCast1= data.list[0].main.temp;
+      var humidityCast1 = data.list[0].main.temp;
       $('#humidity1').text(humidityCast1);
-      var humidityCast2= data.list[1].main.temp;
+      var humidityCast2 = data.list[1].main.temp;
       $('#humidity2').text(humidityCast2);
-      var humidityCast3= data.list[2].main.temp;
+      var humidityCast3 = data.list[2].main.temp;
       $('#humidity3').text(humidityCast3);
-      var humidityCast4= data.list[3].main.temp;
+      var humidityCast4 = data.list[3].main.temp;
       $('#humidity4').text(humidityCast4);
-      var humidityCast5= data.list[4].main.temp;
+      var humidityCast5 = data.list[4].main.temp;
       $('#humidity5').text(humidityCast5);
     }
     //below is the 15 hour forecast wind speed
     {
-      var windSpeedCast1= data.list[0].wind.speed;
+      var windSpeedCast1 = data.list[0].wind.speed;
       $('#windSpeed1').text(windSpeedCast1);
-      var windSpeedCast2= data.list[1].wind.speed;
+      var windSpeedCast2 = data.list[1].wind.speed;
       $('#windSpeed2').text(windSpeedCast2);
-      var windSpeedCast3= data.list[2].wind.speed;
+      var windSpeedCast3 = data.list[2].wind.speed;
       $('#windSpeed3').text(windSpeedCast3);
-      var windSpeedCast4= data.list[3].wind.speed;
+      var windSpeedCast4 = data.list[3].wind.speed;
       $('#windSpeed4').text(windSpeedCast4);
-      var windSpeedCast5= data.list[4].wind.speed;
+      var windSpeedCast5 = data.list[4].wind.speed;
       $('#windSpeed5').text(windSpeedCast5);
     }
-      console.log(data)
-  })
+
+    //below is the icons for the weather
+    // {
+    // var weatherIconCast1= response.weather[0].icon;
+    //   $('#weatherIconCast1').text(weatherIconCast1);
+    //   var windSpeedCast2= data.list[1].wind.speed;
+    //   $('#windSpeed2').text(windSpeedCast2);
+    //   var windSpeedCast3= data.list[2].wind.speed;
+    //   $('#windSpeed3').text(windSpeedCast3);
+    //   var windSpeedCast4= data.list[3].wind.speed;
+    //   $('#windSpeed4').text(windSpeedCast4);
+    //   var windSpeedCast5= data.list[4].wind.speed;
+    //   $('#windSpeed5').text(windSpeedCast5);
+    // }
+
+  }
+
+  )
 }
 )
-
-
-
-
