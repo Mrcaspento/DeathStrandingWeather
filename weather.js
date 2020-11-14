@@ -13,15 +13,17 @@ $("#cityTerm").keypress(function (event) {
     $("#searchBtn").click();
   }
 });
+
 function makeList() {
-  let listItem = $("#citys-go-here").addClass("list-group-item").text(city);
+  let listItem = $("<li>", "<button>").addClass("btn list-group-item").text(city);
   $(".list").append(listItem);
 }
 
 // code below puts the user input into the main dashboard
+
 $('#searchBtn').click(function () {
   event.preventDefault()
-   city = $('#cityTerm').val();
+  city = $('#cityTerm').val();
   $('#cityTerm').val("");
 
   const queryUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + city + apiKey;
@@ -46,13 +48,16 @@ $('#searchBtn').click(function () {
     }
     makeList();
   })
+
+
+
   var queryUrl2 = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + apiKey;
   $.ajax({
     url: queryUrl2,
     method: "GET"
   }).then(function (data) {
     console.log(queryUrl2)
-
+    $('#forecast').empty();
     // below is the list of days and times from now
     {
       var daycast1 = data.list[0].dt_txt;
@@ -106,22 +111,16 @@ $('#searchBtn').click(function () {
       $('#windSpeed5').text(windSpeedCast5);
     }
 
-    //below is the icons for the weather
-    // {
-    // var weatherIconCast1= response.weather[0].icon;
-    //   $('#weatherIconCast1').text(weatherIconCast1);
-    //   var windSpeedCast2= data.list[1].wind.speed;
-    //   $('#windSpeed2').text(windSpeedCast2);
-    //   var windSpeedCast3= data.list[2].wind.speed;
-    //   $('#windSpeed3').text(windSpeedCast3);
-    //   var windSpeedCast4= data.list[3].wind.speed;
-    //   $('#windSpeed4').text(windSpeedCast4);
-    //   var windSpeedCast5= data.list[4].wind.speed;
-    //   $('#windSpeed5').text(windSpeedCast5);
-    // }
-
+    // trying to fix the  icons to the forcast and playing with the for loop for it 
+    //const image = $("<img>").attr("src", "https://openweathermap.org/img/w/" + //city + data[i].weather.icon + ".png")
+    //
+    //for (var i = 0; i < data.length; i++) {
+    //
+    //
+    //  cardBody.prepend(image)
+    //  card.append(cardBody)
+    // $('#forecast').append(card)
   }
 
-  )
-}
+  )}
 )
